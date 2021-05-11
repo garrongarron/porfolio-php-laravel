@@ -106,15 +106,18 @@
                 .then(json => {
                     console.log(json)
                     if (status == 200) {
-                        localStorage.removeItem('access_token')
                         document.querySelector('h2').style.color = '#c00'
                         document.querySelector('h2').innerText = 'Logged out!'
                         document.querySelector('small.logout').innerText = ''
                     } 
+                    localStorage.removeItem('access_token')
                     document.querySelector('.msg > span').innerText = json.message
                     setTimeout(() => {
                         location.reload()
                     }, 2000);
+                }).catch(e=>{
+                    localStorage.removeItem('access_token')
+                    console.error(e);
                 })
         })
     </script>
