@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TestMailingController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +23,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+
+Route::get('/client', function () {
+    return view('rest.client');
+})->name('client');
+Route::get('/vanilla',  function () {
+    return view('vanilla.explorer');
+})->name('vanilla');
+Route::get('/mail', [TestMailingController::class, 'form'])->name('mail');
+Route::post('/sendmail', [TestMailingController::class, 'send'])->name('sendmail');
+
+
+
+require __DIR__ . '/auth.php';
